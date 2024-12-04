@@ -1,0 +1,412 @@
+#floating-chatbot {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+}
+
+#chatbot-icon {
+  width: 60px;
+  height: 60px;
+  background-color: #2596d3;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
+/* Chat Window Styling */
+#chat-container {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 340px;
+  height: 500px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  flex-direction: column;
+  border: 1px solid #ccc;
+}
+
+#chat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #2596d3;
+  /* WhatsApp green color */
+  padding: 10px;
+  border-radius: 10px 10px 0 0;
+  margin-bottom: 10px;
+}
+
+#chat-header #avatar {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+}
+
+#chat-header span {
+  font-size: 16px;
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+#chat-actions button {
+  background: transparent;
+  border: none;
+  font-size: 16px;
+  margin-left: 10px;
+}
+
+#chat-actions button:hover {
+  cursor: pointer;
+}
+
+/* Chat Messages Area */
+#chat-area {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px;
+  background-color: #f4f4f4;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: relative; /* This allows the overlay to position inside it */
+}
+
+.message {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  width: 90%;
+}
+
+.message p {
+  background-color: #96d664;
+  /* WhatsApp message bubble */
+  padding: 10px;
+  border-radius: 10px;
+  max-width: 100%;
+  word-wrap: break-word;
+  margin: 0px;
+}
+
+.message.user-message p {
+  background-color: #bfc6ce;
+  /* User's message bubble */
+  text-align: left;
+}
+
+.message.assistant p {
+  background-color: #25d366;
+  text-align: right;
+}
+
+.action-buttons-chat-area {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 5px;
+}
+
+.pill-button {
+  padding: 8px 16px;
+  background-color: #2596d3;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 14px;
+  flex-basis: 48%;
+  /* 50% width for each button with margin between */
+  text-align: center;
+  height: 50px;
+}
+
+.pill-button:hover {
+  background-color: #128c7e;
+}
+
+/* Input and Send Button Area */
+#input-area {
+  display: flex;
+  padding: 10px;
+  background-color: #fff;
+  border-top: 1px solid #ccc;
+  align-items: center;
+}
+
+#send-btn {
+  padding: 10px 20px;
+  background-color: #25d366;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-left: 10px;
+}
+
+#send-btn:hover {
+  background-color: #128c7e;
+}
+
+/* Mic Icon Button */
+.mic-icon {
+  font-size: 30px;
+  cursor: pointer;
+  margin-left: 10px;
+  color: #25d366;
+}
+
+.mic-icon.recording {
+  color: red;
+  /* Change color when recording */
+}
+
+/* Text Editor Popup Styling */
+#editor-popup {
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #fff;
+  padding: 20px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  display: none;
+  z-index: 1000;
+}
+
+#editor-textarea {
+  width: 100%;
+  height: 150px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+#send-text,
+#cancel-edit {
+  padding: 10px 15px;
+  background-color: #25d366;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+#send-text:hover,
+#cancel-edit:hover {
+  background-color: #128c7e;
+}
+
+/* Responsive chat window adjustments */
+@media (max-width: 480px) {
+  #chat-container {
+    width: 270px;
+    height: 400px;
+  }
+
+  #chat-area {
+    padding: 8px;
+  }
+
+  .message p {
+    font-size: 14px;
+  }
+
+  .pill-button {
+    font-size: 12px;
+  }
+}
+
+/* Style for the input area container */
+#input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+textarea {
+  width: 100%;
+  /* Adjusts the width of the textarea */
+  min-height: 50px;
+  /* Minimum height for the textarea */
+  padding: 8px;
+  font-size: 14px;
+  resize: vertical;
+  /* Allows the user to resize vertically */
+  overflow: hidden;
+  /* Prevents overflow */
+}
+
+
+/* Style for the mic icon inside the input box */
+#mic-btn {
+  position: absolute;
+  right: 50px;
+  /* Positioning mic icon inside the text area */
+  bottom: 10px;
+  cursor: pointer;
+}
+
+/* Style for the send button */
+.send-btn {
+  position: absolute;
+  right: 10px;
+  /* Positioning send icon inside the text area */
+  bottom: 10px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.send-btn img {
+  width: 20px;
+  height: 20px;
+}
+
+.maxmimize {
+  height: 90vh !important;
+  width: 50vw !important;
+
+  textarea {
+    height: 100px;
+  }
+}
+.user-message {
+  align-self: end;
+  justify-content: flex-end;
+}
+.bot-message {
+  align-self: start;
+  .list-item {
+    padding: 5px 0px;
+  }
+}
+.chat-action-text {
+  padding: 8px 16px;
+  background-color: #2596d3;
+  border: none;
+  border-radius: 10px;
+  cursor: default;
+}
+/* Fade Screen Overlay inside chatbot */
+#fade-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+  z-index: 999; /* Ensure it covers other elements inside chat */
+  display: none; /* Initially hidden */
+}
+
+/* To make it visible when needed */
+#fade-overlay.visible {
+  display: block;
+}
+
+/* Spinner inside the fade screen */
+#fade-overlay .loading-spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-top: 4px solid white;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+}
+
+/* Spinner animation */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+/* Input area for chat */
+#input-area {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+  margin-top: 10px;
+}
+
+/* Textarea styling */
+#user-input-text-area {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  resize: none; /* Disable resizing */
+  overflow: hidden; /* Hide scrollbars */
+  font-size: 14px;
+  line-height: 1.5;
+  box-sizing: border-box; /* Ensure padding doesn't affect width */
+  min-height: 40px;
+  margin-left: 5px; /* Add space between icons and textarea */
+}
+
+/* Button styling for send icon */
+#user-input {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+/* Mic Icon styling */
+#mic-icon {
+  cursor: pointer;
+  font-size: 16px;
+  background-color: red;
+}
+
+/* Icon class for send button */
+.icon {
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* Focused textarea to indicate input */
+#user-input-text-area:focus {
+  outline: none;
+  border-color: #0056b3;
+}
+
+.error-message {
+  background-color: red;
+  p {
+    background-color: unset;
+  }
+}
+
+.show-more {
+  color: #007bff;
+  cursor: pointer;
+  padding-left: 5px;
+}
+
+.message-text.expanded {
+  white-space: normal;
+}
+
+.show-more.hidden {
+  display: none;
+}

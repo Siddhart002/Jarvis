@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' https://cdn.jsdelivr.net">
+    <title>AI Assistant</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Add these scripts inside your HTML document's <head> section -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/readability/0.4.4/Readability.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cheerio/1.0.0-rc.3/cheerio.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/puppeteer/19.0.0/puppeteer.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@2.4.1/dist/purify.min.js"></script> -->
+</head>
+<body>
+    <div id="chatbot-container">
+        <div id="chatbot-header">
+            <span>AI Assistant</span>
+        </div>
+        <div id="chatbot-body">
+            <div id="chatbot-messages">
+                <!-- Messages will appear here dynamically -->
+            </div>
+        </div>
+        <div id="chatbot-footer">
+            <input type="text" id="user-input" placeholder="Ask me anything..." />
+            <button id="send-btn">Send</button>
+        </div>
+    </div>
+
+    <!-- Action Buttons (visible after content classification) -->
+    <div id="action-buttons" style="display:none;">
+        <button id="credibility-check">Check Credibility</button>
+        <button id="summarize-content">Summarize Content</button>
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+{
+    "manifest_version": 3,
+    "name": "AI Content Assistant",
+    "version": "1.0",
+    "description": "A personal assistant to help with content classification, credibility checks, summarization, and data protection alerts.",
+    "permissions": [
+      "activeTab",
+      "storage",
+      "tabs",
+      "contextMenus"
+    ],
+    "background": {
+      "service_worker": "background.js"
+    },
+    "content_scripts": [
+      {
+        "matches": ["<all_urls>"],
+        "js": ["dist/content.bundle.js"],
+        "css": ["styles.css"]
+      }
+    ],
+    "action": {
+      "default_popup": "popup.html",
+      "default_icon": {
+        "16": "images/icon16.png",
+        "48": "images/icon64.png",
+        "128": "images/icon128.png"
+      }
+    },
+    "web_accessible_resources": [
+        {
+            "resources": ["libs/*.js"],
+            "matches": ["<all_urls>"]
+        }
+    ],
+    "host_permissions": [
+      "http://*/*",
+      "https://*/*",
+      "https://cdn.jsdelivr.net/*"
+    ],
+    "content_security_policy": {
+        "script-src": "'self' https://cdn.jsdelivr.net",
+        "object-src": "'self'"
+      },
+    "icons": {
+      "16": "images/icon16.png",
+      "48": "images/icon64.png",
+      "128": "images/icon128.png"
+    }
+  }
+  
